@@ -1,16 +1,26 @@
-
+function GoogleCity(props){
+	return(
+		<div className="cityName">
+			{props.cityObject.city}
+		</div>
+	)
+}
 
 var Cities = React.createClass({
  	render: function(){
  		var cityRows = []; 
- 		this.props.cities.map(function(city, index){
- 			console.log(city.city)
+ 		this.props.cities.map(function(currentCity, index){
+ 			console.log(currentCity.city)
+ 			cityRows.push(<GoogleCity cityObject={currentCity} key={index} />)
  		})
  		return(
- 			<h1> Hello, World. I am cold.</h1>
+ 			<div> {cityRows}</div>
  		)
  	}
  });
+
+
+
 
 //cities.js is global and can be accessed by this file
 
