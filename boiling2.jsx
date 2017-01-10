@@ -26,6 +26,17 @@ var TemperatureInput = React.createClass({
 	}
 })
 
+//create a try convert function 
+
+function tryConvert(convertMeToWhat, temperature){
+	if(convertMeToWhat === "convertMeToFahrenheit"){
+		var convertedNumber = (temperature * 9 / 5 ) + 32	
+
+	}else if(convertMeToWhat === "convertMeToCelsius"){
+		var convertedNumber = (temperature-32) * 5 /9; 
+	}
+	return convertedNumber;
+}
 
 var Calculator = React.createClass({
 	getInitialState: function(){
@@ -56,18 +67,18 @@ var Calculator = React.createClass({
 		var tempUnit = this.state.tempUnit;
 		var temperature = this.state.temperature;
 
-		if(this.state.tempUnit == "celsius"){
-			var cTemp = this.state.temperature;
-			var fTemp = tryConvert('convertMeToFahrenheit', this.state.temperature)
+		if(tempUnit == "celsius"){
+			var cTemp = temperature;
+			var fTemp = tryConvert('convertMeToFahrenheit', temperature)
 		}else{
-			var fTemp = this.state.temperature;
-			var cTemp = tryConvert('convertMeToCelsius', this.state.temperature)
+			var fTemp = temperature;
+			var cTemp = tryConvert('convertMeToCelsius', temperature)
 		}
 		return(
 			<div>
 				<TemperatureInput onChange={this.handleCelsiusChange} unitType="Celsius" />
 				<TemperatureInput onChange={this.handleFahrenheitChange} unitType="Fahrenheit"/>
-				<BoilingVerdict cTemp={101} /> 
+				<BoilingVerdict cTemp={Number(cTemp)} /> 
 			</div>
 		)
 	}
